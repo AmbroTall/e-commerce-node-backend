@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "heroku-postbuild" : "cd ecommerce_frontend && npm install && npm run build"
+  
   },
   "author": "Ambro",
   "license": "ISC",
