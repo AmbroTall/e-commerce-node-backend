@@ -45,22 +45,22 @@ router.get('/find/:id', verifyTokenAdmin, async (req,res)=>{
 
 //GET ALL USERs ONLY ADMIN
 router.get('/find', verifyTokenAdmin, async (req,res)=>{
-    try{
-        const user = await User.find()
-        res.status(200).json(user)
-    }catch(err){
-        res.status(500).json(err)
-    }
-
-     //add query to the URL to filter and sort
-    //  const query = req.query.new
-
-    //  try{
-    //     const user = query ? await User.find().sort({_id : -1}).limit(5) : await User.find()
+    // try{
+    //     const user = await User.find()
     //     res.status(200).json(user)
     // }catch(err){
     //     res.status(500).json(err)
     // }
+
+    //  add query to the URL to filter and sort
+     const query = req.query.new
+
+     try{
+        const user = query ? await User.find().sort({_id : -1}).limit(5) : await User.find()
+        res.status(200).json(user)
+    }catch(err){
+        res.status(500).json(err)
+    }
 })
 
 

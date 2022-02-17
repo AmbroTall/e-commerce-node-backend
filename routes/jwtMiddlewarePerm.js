@@ -11,6 +11,8 @@ const verifyToken = (req,res,next) =>{
             req.user = user
             next()
         })
+    }else {
+        return res.status(401).json("You are not authenticated")
     }
 }
 

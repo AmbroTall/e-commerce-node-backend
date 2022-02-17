@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const Order = require("../models/Product")
+const Order = require("../models/Order")
 const { verifyTokenAdmin, verifyTokenAndAuthorization } = require("./jwtMiddlewarePerm")
 
 

@@ -27,6 +27,8 @@ router.post('/register', async (req,res)=>{
     }
 })
 
+
+
 //Login Logic
 router.post('/login', async (req,res)=>{
     try{
@@ -37,11 +39,11 @@ router.post('/login', async (req,res)=>{
         !user && res.status(401).json("Username does not exist")
 
         //taking the hashed pswd in the register logic
-        const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC).toString()
+        const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC)
 
         //converting the hashed password to a string
         const originalPasswd = hashedPassword.toString(CryptoJS.enc.Utf8)
-        !originalPasswd !== req.body.password && res.status(401).json("Password does not match")
+        originalPasswd !== req.body.password && res.status(401).json("Password does not match")
 
         //################# JWT ####################
         //Using the id and isAdmin fields from our DB
@@ -59,9 +61,9 @@ router.post('/login', async (req,res)=>{
         //hide password when returning user information from DB
         const {password, ...others} = user._doc
 
-        res.status(200).json({msg: "Login Success", ...others})
+        res.status(200).json({msg: "Login Success", ...others, accessToken})
     }catch(err){
-        res.status(500).json("Bad Login Credentials")
+        res.status(401).json({err})
     }
 })
 
