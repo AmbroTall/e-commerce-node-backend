@@ -22,7 +22,12 @@ app.use('/commerce/order', require('./routes/order_route'))
 app.use('/commerce/cart', require('./routes/cart_route'))
 app.use('/commerce/user', require('./routes/user_route'))
 
+app.use(express.static(path.join(__dirname, "/ecommerce_frontend")))
 
-app.listen(5000, ()=>{
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, '/ecommerce_frontend/build', 'index.html' ))
+})
+
+app.listen(process.env.PORT || 5000, ()=>{
     console.log('Server Runnig ...');
 })
