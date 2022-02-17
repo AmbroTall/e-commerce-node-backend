@@ -25,5 +25,5 @@ app.use('/commerce/user', require('./routes/user_route'))
 
 
 app.listen(process.env.PORT || 5000, ()=>{
-    console.log('Server Runnig ...');
+    console.log('Server Runnig ...')
 })
